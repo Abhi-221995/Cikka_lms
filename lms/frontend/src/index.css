@@ -1,0 +1,44 @@
+@import 'frappe-ui/style.css';
+@import './styles/codemirror.css';
+
+/*
+ * Pin a Combobox/MultiSelect footer to the bottom of its dropdown so footer
+ * actions stay reachable while options scroll. Opt-in via [data-popover-footer-sticky]
+ * on the slot's inner element so frappe-ui's `[data-slot="footer"]` wrapper picks it up.
+ * Unscoped because frappe-ui popovers portal to <body>.
+ */
+[data-slot='content-body']
+	[data-slot='footer']:has(> [data-popover-footer-sticky]) {
+	position: sticky;
+	bottom: -0.25rem;
+	z-index: 1;
+}
+
+/*
+ * Subtle entrance animations used on the Home page (and reusable elsewhere).
+ * `.animate-fade-in-up` fades and lifts an element into place; pair it with an
+ * inline `animation-delay` to stagger a list of cards.
+ */
+@keyframes lms-fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fade-in-up {
+	opacity: 0;
+	animation: lms-fade-in-up 0.5s ease-out both;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+	.animate-fade-in-up {
+		opacity: 1;
+		animation: none;
+	}
+}
